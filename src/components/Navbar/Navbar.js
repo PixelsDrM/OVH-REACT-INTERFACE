@@ -2,34 +2,34 @@ import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
 
+const API_URL=process.env.REACT_APP_API_URL
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const API_URL=process.env.REACT_APP_API_URL
-
 export default function Navbar() {
-  var navigation = []
-
   var [zones, setZones] = useState([])
 
-  function fetchZones() {
-    fetch(`${API_URL}/domain/zone`)
-    .then(response => response.json())
-    .then(data => {
-      setZones(data)
-    })
-  }
-
   useEffect(() => {
+    function fetchZones() {
+      fetch(`${API_URL}/domain/zone`)
+      .then(response => response.json())
+      .then(data => {
+        setZones(data)
+      })
+    }
+
     fetchZones()
   }, [])
+
+  var navigation = []
 
   for(let zone of zones) {
     navigation.push({
       name: zone,
       href: '/' + zone,
-      current: false,
+      current: window.location.pathname === '/' + zone ? true : false
     })
   }
 
@@ -51,18 +51,6 @@ export default function Navbar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
