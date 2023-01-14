@@ -1,13 +1,24 @@
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import Record from './components/Record/Record';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+import Navbar from './components/Navbar';
+import Record from './components/Record';
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 
 export default function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <p>OVH React Interface</p>
-      <Record />
-    </div>
-  );
+    return (
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            <div className="App">
+                <Navbar />
+                <Record />
+            </div>
+        </ThemeProvider>
+    );
 }
