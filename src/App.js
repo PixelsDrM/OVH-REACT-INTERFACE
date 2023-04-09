@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import Navbar from './components/Navbar';
 import Record from './components/Record';
+import { Box } from '@mui/material';
 
 const darkTheme = createTheme({
     palette: {
@@ -14,11 +15,11 @@ const darkTheme = createTheme({
 export default function App() {
     return (
         <ThemeProvider theme={darkTheme}>
-            <CssBaseline />
-            <div className="App">
+            <CssBaseline enableColorScheme />
+            <Box sx={{ flexGrow: 1 }} className="App">
                 <Navbar />
                 <Record />
-            </div>
+            </Box>
         </ThemeProvider>
     );
 }

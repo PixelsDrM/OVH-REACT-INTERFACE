@@ -7,6 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const API_URL=process.env.REACT_APP_API_URL;
 
@@ -54,14 +57,15 @@ export default function Record() {
     }
 
     return (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="Records table">
+        <TableContainer component={Paper} sx={{ maxHeight: '100vh' }}>
+          <Table sx={{ minWidth: 650 }} aria-label="Records table" stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell align="center">Type</TableCell>
                 <TableCell align="center">Subdomain</TableCell>
                 <TableCell align="center">Target</TableCell>
                 <TableCell align="center">TTL</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -71,6 +75,10 @@ export default function Record() {
                         <TableCell align="center">{record.subDomain}</TableCell>
                         <TableCell align="center">{record.target}</TableCell>
                         <TableCell align="center">{record.ttl}</TableCell>
+                        <TableCell align="center">
+                            <Button variant="contained" color="primary" size="small" startIcon={<EditIcon />} sx={{ mr: 1 }}>Edit</Button>
+                            <Button variant="contained" color="error" size="small" startIcon={<DeleteIcon />} sx={{ ml: 1 }}>Delete</Button>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
